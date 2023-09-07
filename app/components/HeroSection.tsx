@@ -1,39 +1,41 @@
-import { Button } from "@/components/ui/button";
+"use client";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
-type Props = {};
+import Link from "next/link";
 
-function HeroSection({}: Props) {
+const Hero = () => {
   return (
-    <section className="flex h-screen z-0 w-full max-w-7xl xl:mx-auto   py-4">
-      {/* left section */}
-      <div className="w-1/2 flex flex-col items-start mx-4 gap-4 justify-center -mt-32 ">
-        <h2 className=" text-7xl font-bold ">
-          Embrace Your <br /> SGSITS Identity
-        </h2>
-        <p className="font-medium text-xl">
+    <div className="h-screen w-full relative bg-black">
+      <div className="text-white absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:text-left small:justify-end small:items-start small:p-32">
+        <h1 className="heading1  drop-shadow-lg">
+          Introducing Official Merchandise
+        </h1>
+        <p className=" heading4 drop-shadow-lg mt-5 max-w-[32rem] ">
           Discover and Flaunt Campus Spirit with our Exclusive Merchandise!
         </p>
-        <Button
-          size={"lg"}
-          className="rounded-full w-48 h-14 text-xl mt-8 bg-red-500"
+        <Link
+          className="flex gap-1 items-center border bottom-10 absolute  rounded-full px-4 p-1 "
+          href="/store"
         >
-          Shop Now
-        </Button>
+          Explore products <ChevronDown />{" "}
+        </Link>
       </div>
-      {/* right section */}
-      <div className="flex justify-center items-center w-1/2 h-full">
-        <div className="w-72  h-96 rounded-2xl overflow-hidden relative -mt-20">
-          <Image
-            src={
-              "https://img.freepik.com/premium-photo/guy-model-appearance-black-clothes-poses-gray-studio-background-male-fashion-portrait_257482-1465.jpg"
-            }
-            fill
-            alt="imagehero"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
 
-export default HeroSection;
+      {/* background image */}
+
+      <Image
+        src={"/herobg.webp"}
+        alt="Photo"
+        className="absolute inset-0 brightness-75"
+        draggable="false"
+        fill
+        sizes="100vw"
+        style={{
+          objectFit: "cover",
+        }}
+      />
+    </div>
+  );
+};
+
+export default Hero;
