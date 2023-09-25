@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown, Menu, Search, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, spring } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 type Props = {};
 
 function Navbar({}: Props) {
+  const pathname = usePathname();
+  const router = useRouter();
+  console.log(pathname);
   const [colorChange, setColorchange] = useState(false);
   const changeNavbarColor = () => {
     if (window.scrollY <= 25) {
@@ -21,19 +25,15 @@ function Navbar({}: Props) {
   });
   return (
     <motion.div
-      transition={{
-        type: "spring",
-        ease: "easeInOut",
-        stiffness: 700,
-        damping: 33,
-        delay: 0,
-        duration: 0.35,
-      }}
-      initial="hidden"
-      animate="show"
-      className={` ${
-        !colorChange ? "bg-white shadow-md" : "text-white  bg-transperant"
-      }  w-full  fixed z-30   top-0 duration-300 lg:px-0 px-3 `}
+      className={`
+       ${
+         !colorChange && pathname === "/"
+           ? "bg-white  backdrop-blur-[4px] "
+           : "text-white  bg-transperant "
+       } 
+       ${
+         pathname !== "/" ? "shadow-md bg-white text-black" : ""
+       } w-full  fixed z-30  top-0 duration-100 lg:px-0 px-3 `}
     >
       <div className="flex p-2  items-center w-full max-w-7xl mx-auto justify-between">
         {/* TITLE */}
@@ -45,19 +45,22 @@ function Navbar({}: Props) {
         {/* Centre Section */}
         <div className="w-1/3 hidden lg:flex px-auto">
           <ul className="flex space-x-4">
-            <li className="font- drop-shadow-md cursor-pointer hover:opacity-60">
+            <li
+              onClick={() => router.push("/")}
+              className="font-medium drop-shadow-md cursor-pointer hover:opacity-60"
+            >
               Home
             </li>
-            <li className="font- drop-shadow-md cursor-pointer hover:opacity-60">
+            <li className="font-medium drop-shadow-md cursor-pointer hover:opacity-60">
               About
             </li>
-            <li className="font- drop-shadow-md cursor-pointer hover:opacity-60">
+            <li className="font-medium drop-shadow-md cursor-pointer hover:opacity-60">
               Services
             </li>
-            <li className="font- drop-shadow-md cursor-pointer hover:opacity-60">
+            <li className="font-medium drop-shadow-md cursor-pointer hover:opacity-60">
               Facilities
             </li>
-            <li className="font- drop-shadow-md cursor-pointer hover:opacity-60">
+            <li className="font-medium drop-shadow-md cursor-pointer hover:opacity-60">
               More
             </li>
           </ul>
